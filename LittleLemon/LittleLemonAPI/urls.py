@@ -7,5 +7,8 @@ urlpatterns = [
     path('menu-items/<int:pk>/', views.MenuItemsRetrieveUpdateDestroy.as_view()),
     path('category/', views.CategoryCreate.as_view()),
     path('groups/manager/users/', views.managers),
+    path('groups/delivery-crew/users/', views.delivery_crew),
     path('api-token-auth/', obtain_auth_token),
+    path('cart/menu-items/', views.CartListCreate.as_view()),
+    path('cart/menu-items/<int:pk>/', views.CartDestroy.as_view()),
 ]
