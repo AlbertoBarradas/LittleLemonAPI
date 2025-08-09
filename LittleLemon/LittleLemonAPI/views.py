@@ -1,12 +1,13 @@
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView
 from .models import Category, MenuItem, Order, OrderItem, Cart
-from rest_framework import generics, status, viewsets, filters
+from rest_framework import generics, status, viewsets, filters, permissions
 from django.contrib.auth.models import User, Group
 from .serializers import MenuItemSerializer, CategorySerializer
 from rest_framework.permissions import IsAdminUser
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
+from .permissions import IsInManagerGroup
 
 # Create your views here.
 class MenuItemsListCreate(generics.ListCreateAPIView):
@@ -14,14 +15,24 @@ class MenuItemsListCreate(generics.ListCreateAPIView):
     serializer_class = MenuItemSerializer
     filter_backends = [filters.SearchFilter, filters.OrderingFilter]
     search_fields = ['title', 'category']
+    def get_permissions(self):
+        if self.request.method == 'POST':
+            return [IsInManagerGroup()]
+        return [permissions.AllowAny()]
+
+class MenuItemsRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
+    queryset = MenuItem.objects.all()
+    serializer_class = MenuItemSerializer
+    def get_permissions(self):
+        if self.request.method == 'DELETE' or self.request.method == 'PUT' or self.request.method == 'PATCH':
+            return [IsInManagerGroup()]
+        return [permissions.AllowAny()]
 
 class CategoryCreate(generics.CreateAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+    permission_classes = [IsInManagerGroup]
 
-class MenuItemsRetrieve(generics.RetrieveAPIView):
-    queryset = MenuItem.objects.all()
-    serializer_class = MenuItemSerializer
 
 @api_view(['POST'])
 @permission_classes([IsAdminUser])
