@@ -9,7 +9,8 @@ from rest_framework.permissions import IsAdminUser
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from django.http import JsonResponse
-from .permissions import IsInManagerGroup
+from .permissions import IsInManagerGroup, IsManagerOrSuperAdmin
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 
 # Create your views here.
 class MenuItemsListCreate(generics.ListCreateAPIView):
@@ -19,7 +20,7 @@ class MenuItemsListCreate(generics.ListCreateAPIView):
     search_fields = ['title', 'category']
     def get_permissions(self):
         if self.request.method == 'POST':
-            return [IsInManagerGroup()]
+            return [IsAdminUser()]
         return [permissions.AllowAny()]
 
 class MenuItemsRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
@@ -33,18 +34,25 @@ class MenuItemsRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
 class CategoryCreate(generics.CreateAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
-    permission_classes = [IsInManagerGroup]
+    permission_classes = [IsAdminUser]
 
 class CartListCreate(generics.ListCreateAPIView):
-    queryset = Cart.objects.all()
     serializer_class = CartSerializer
+    permission_classes = [IsAuthenticated]
 
-class CartDestroy(generics.RetrieveDestroyAPIView):
-    queryset = Cart.objects.all()
-    serializer_class = CartSerializer
+    def get_queryset(self):
+        cart = Cart.objects.filter(user=self.request.user)
+        return cart
+    
+    def delete(self, request, *args, **kwargs):
+        Cart.objects.all().filter(user=self.request.user).delete()
+        return Response("ok")
+
+class OrderListCreate(generics.ListCreateAPIView):
+    
 
 @api_view(['POST', 'GET', 'DELETE'])
-@permission_classes([IsInManagerGroup])
+@permission_classes([IsAdminUser])
 def managers(request):
     manager = Group.objects.get(name="Manager")
     if request.method == 'GET':
@@ -66,12 +74,15 @@ def managers(request):
     return Response({"message":"error"}, status.HTTP_400_BAD_REQUEST)
 
 @api_view(['POST', 'GET', 'DELETE'])
-@permission_classes([IsInManagerGroup])
+@permission_classes([IsAuthenticated])
 def delivery_crew(request):
     delivery_crew = Group.objects.get(name="Delivery crew")
     if request.method == 'GET':
         users = delivery_crew.user_set.all().values('id', 'username', 'email')
         return Response(users)
+    
+    if not IsManagerOrSuperAdmin().has_permission(request, delivery_crew):
+        return Response({"detail": "Not authorized"}, status=status.HTTP_403_FORBIDDEN)
     
     username = request.data['username']
     if username:

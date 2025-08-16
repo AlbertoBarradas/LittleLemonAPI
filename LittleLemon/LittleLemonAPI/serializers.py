@@ -42,3 +42,9 @@ class CartSerializer(serializers.HyperlinkedModelSerializer):
                 fields = ['user_id', 'menuitem_id']
             )
         ]
+
+class OrderItemSerializer(serializers.ModelSerializer):
+    
+
+class OrderSerializer(serializers.ModelSerializer):
+

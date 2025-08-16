@@ -10,5 +10,4 @@ urlpatterns = [
     path('groups/delivery-crew/users/', views.delivery_crew),
     path('api-token-auth/', obtain_auth_token),
     path('cart/menu-items/', views.CartListCreate.as_view()),
-    path('cart/menu-items/<int:pk>/', views.CartDestroy.as_view()),
 ]
