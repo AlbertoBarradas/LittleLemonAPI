@@ -26,25 +26,29 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ['id', 'username', 'email']
 
-class CartSerializer(serializers.HyperlinkedModelSerializer):
-    user = UserSerializer(read_only = True)
-    user_id = serializers.IntegerField(write_only = True)
-
-    menuitem = MenuItemSerializer(read_only=True)
-    menuitem_id = serializers.IntegerField(write_only=True)
+class CartSerializer(serializers.ModelSerializer):
+    user = serializers.PrimaryKeyRelatedField(
+        read_only=True,
+        default = serializers.CurrentUserDefault()
+    )
+    unit_price = serializers.DecimalField(
+        source='menuitem.price',
+        max_digits=6,
+        decimal_places=2,
+        read_only=True
+    )
 
     class Meta:
         model = Cart
-        fields = ['user', 'user_id', 'menuitem', 'menuitem_id', 'price', 'quantity']
-        validators = [
-            UniqueTogetherValidator(
-                queryset = Cart.objects.all(),
-                fields = ['user_id', 'menuitem_id']
-            )
-        ]
+        fields = ['user', 'menuitem', 'unit_price', 'quantity', 'price']
+        read_only_fields=['user', 'unit_price', 'price']
+        
+    def create(self, validated_data):
+        user = self.context['request'].user
+        return Cart.objects.create(user=user, **validated_data)
 
-class OrderItemSerializer(serializers.ModelSerializer):
+""" class OrderItemSerializer(serializers.ModelSerializer):
     
 
-class OrderSerializer(serializers.ModelSerializer):
+class OrderSerializer(serializers.ModelSerializer): """
 

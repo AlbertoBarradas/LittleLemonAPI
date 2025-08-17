@@ -11,13 +11,19 @@ from rest_framework.response import Response
 from django.http import JsonResponse
 from .permissions import IsInManagerGroup, IsManagerOrSuperAdmin
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from rest_framework.pagination import PageNumberPagination
 
-# Create your views here.
 class MenuItemsListCreate(generics.ListCreateAPIView):
     queryset = MenuItem.objects.all()
     serializer_class = MenuItemSerializer
     filter_backends = [filters.SearchFilter, filters.OrderingFilter]
-    search_fields = ['title', 'category']
+    search_fields = ['title', 'category__title']
+    ordering_fields = ['title', 'price']
+    pagination_class = PageNumberPagination
+    pagination_class.page_size = 4
+    pagination_class.page_query_param = 'pagenum'
+    pagination_class.page_size_query_param = 'page'
+    pagination_class.max_page_size = 20
     def get_permissions(self):
         if self.request.method == 'POST':
             return [IsAdminUser()]
@@ -30,6 +36,11 @@ class MenuItemsRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
         if self.request.method == 'DELETE' or self.request.method == 'PUT' or self.request.method == 'PATCH':
             return [IsInManagerGroup()]
         return [permissions.AllowAny()]
+
+class CategoryList(generics.ListAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+    permission_classes = [IsAuthenticated]
 
 class CategoryCreate(generics.CreateAPIView):
     queryset = Category.objects.all()
@@ -48,7 +59,7 @@ class CartListCreate(generics.ListCreateAPIView):
         Cart.objects.all().filter(user=self.request.user).delete()
         return Response("ok")
 
-class OrderListCreate(generics.ListCreateAPIView):
+#class OrderListCreate(generics.ListCreateAPIView):
     
 
 @api_view(['POST', 'GET', 'DELETE'])
