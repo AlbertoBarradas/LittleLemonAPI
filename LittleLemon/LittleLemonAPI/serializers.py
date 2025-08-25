@@ -47,8 +47,15 @@ class CartSerializer(serializers.ModelSerializer):
         user = self.context['request'].user
         return Cart.objects.create(user=user, **validated_data)
 
-""" class OrderItemSerializer(serializers.ModelSerializer):
+class OrderItemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = OrderItem
+        fields = ['order', 'menuitem', 'quantity', 'price']
     
 
-class OrderSerializer(serializers.ModelSerializer): """
+class OrderSerializer(serializers.ModelSerializer):
+    orderitem = OrderItemSerializer(many=True, read_only=True, source='order')
 
+    class Meta:
+        model = Order
+        fields = ['id', 'user', 'delivery_crew', 'status', 'date', 'total', 'orderitem']

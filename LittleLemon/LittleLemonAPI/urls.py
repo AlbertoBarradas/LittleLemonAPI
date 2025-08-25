@@ -11,4 +11,6 @@ urlpatterns = [
     path('groups/delivery-crew/users/', views.delivery_crew),
     path('api-token-auth/', obtain_auth_token),
     path('cart/menu-items/', views.CartListCreate.as_view()),
+    path('orders/', views.OrderView.as_view()),
+    path('orders/<int:pk>/', views.SingleOrderView().as_view()),
 ]
