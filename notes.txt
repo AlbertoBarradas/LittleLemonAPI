@@ -1,4 +1,7 @@
 superuser:
+-username: admin
+-password: admin
 
-username: admin
-password: admin
+regular user:
+-username: Frank
+-password: frank12345!
