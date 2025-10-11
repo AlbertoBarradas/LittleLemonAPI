@@ -3,6 +3,15 @@ superuser:
 -password: admin
 -token: f91f9bf7024ca6c3ebba7b0d3e6e0bc52e8cb670
 
-regular user:
+users:
 -username: Frank
 -password: frank12345!
+-token: 898d097d76aaf1978a58b92802f551bd2479b894
+
+-username: Emma
+-password: emma12345!
+-token: 96d9cb04fb020e274ac285493ed66059f2181239
+
+-username: Daniel
+-password: daniel12345!
+-token: fcc0b2e57470a1600c919a9d45a135c753a8e51b

@@ -1,8 +1,8 @@
 {
 	"info": {
-		"_postman_id": "e4bd46d1-f37d-4483-afdc-79d3b2258cb6",
+		"_postman_id": "6c13a8ec-332c-4ba1-9914-7b198c94d761",
 		"name": "API Test",
-		"description": "These requests test the functionality of the Little Lemon API.\n\nThe API makes possible to register and log in users, that could be customers, managers or staff, each one with certain permissions to make different actions. There is also an admin user who can assign users to the different groups.\n\nThe requests present in this collection start with the actions that a regular customer can perform, such as register, browse items and categories, with a pagination and sorting feature, they can also add items to the cart and place orders.\n\nThen it goes to the admin actions that basically shows how the admin can add users to the manager group, add and delete menu items and add categories.\n\nThe manager actions consists in update the item of the day, add users to the delivery crew group, and assign orders to a certain member of the said group.\n\nA delivery crew member can view the orders assigned to them and upgrade the status of an order when it has been delivered.\n\n## How to test\n\n1. Make sure the API server is running (locally or deployed).\n    \n2. Execute the requests in order\n    \n3. Check responses in JSON format to verify functionality.\n    \n\nEstas solicitudes prueban la funcionalidad de la API Little Lemon.  \nLa API permite registrar e iniciar sesión a usuarios, que pueden ser clientes, gerentes o personal, cada uno con ciertos permisos para realizar diferentes acciones. También existe un usuario administrador que puede asignar usuarios a los distintos grupos.\n\nLas solicitudes presentes en esta colección comienzan con las acciones que puede realizar un cliente regular, como registrarse, explorar productos y categorías (con paginación y ordenamiento). También puede agregar productos al carrito y realizar pedidos.\n\nLuego siguen las acciones del administrador, que básicamente muestran cómo puede agregar usuarios al grupo de gerentes, agregar y eliminar productos del menú, y agregar categorías.\n\nLas acciones del gerente consisten en actualizar el producto del día, agregar usuarios al grupo de personal de entrega y asignar pedidos a un miembro del mismo.\n\nUn miembro del personal de entrega puede ver los pedidos asignados a él y actualizar el estado de un pedido cuando ha sido entregado.\n\n## Cómo probar\n\n1. Asegúrate de que el servidor de la API esté corriendo (local o desplegado).\n    \n2. Ejecuta las solicitudes en el orden\n    \n3. Revisa las respuestas en formato JSON para verificar la funcionalidad.",
+		"description": "These requests test the functionality of the Little Lemon API.\n\nThe API makes possible to register and log in users, that could be customers, managers or staff, each one with certain permissions to make different actions. There is also an admin user who can assign users to the different groups.\n\nThe requests present in this collection start with the actions that a regular customer can perform, such as register, browse items and categories, with a pagination and sorting feature, they can also add items to the cart and place orders.\n\nThen it goes to the admin actions that basically shows how the admin can add users to the manager group, add menu items and add categories.\n\nThe manager actions consists in update the item of the day, add users to the delivery crew group, and assign orders to a certain member of the said group.\n\nA delivery crew member can view the orders assigned to them and upgrade the status of an order when it has been delivered.\n\n## How to test\n\n1. Make sure the API server is running (locally or deployed).\n    \n2. Execute the requests in order\n    \n3. Check responses in JSON format to verify functionality.\n    \n\nEstas solicitudes prueban la funcionalidad de la API Little Lemon.  \nLa API permite registrar e iniciar sesión a usuarios, que pueden ser clientes, gerentes o personal, cada uno con ciertos permisos para realizar diferentes acciones. También existe un usuario administrador que puede asignar usuarios a los distintos grupos.\n\nLas solicitudes presentes en esta colección comienzan con las acciones que puede realizar un cliente regular, como registrarse, explorar productos y categorías (con paginación y ordenamiento). También puede agregar productos al carrito y realizar pedidos.\n\nLuego siguen las acciones del administrador, que básicamente muestran cómo puede agregar usuarios al grupo de gerentes, agregar productos del menú, y agregar categorías.\n\nLas acciones del gerente consisten en actualizar el producto del día, agregar usuarios al grupo de personal de entrega y asignar pedidos a un miembro del mismo.\n\nUn miembro del personal de entrega puede ver los pedidos asignados a él y actualizar el estado de un pedido cuando ha sido entregado.\n\n## Cómo probar\n\n1. Asegúrate de que el servidor de la API esté corriendo (local o desplegado).\n    \n2. Ejecuta las solicitudes en el orden\n    \n3. Revisa las respuestas en formato JSON para verificar la funcionalidad.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "49138912"
 	},
@@ -98,7 +98,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Token 810cc763b05878c0e23cdc6d89f5fc1fe26095f4",
+						"value": "Token fcc0b2e57470a1600c919a9d45a135c753a8e51b",
 						"type": "text"
 					}
 				],
@@ -127,7 +127,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Token 810cc763b05878c0e23cdc6d89f5fc1fe26095f4",
+						"value": "Token fcc0b2e57470a1600c919a9d45a135c753a8e51b",
 						"type": "text"
 					}
 				],
@@ -156,7 +156,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Token 810cc763b05878c0e23cdc6d89f5fc1fe26095f4",
+						"value": "Token fcc0b2e57470a1600c919a9d45a135c753a8e51b",
 						"type": "text"
 					}
 				],
@@ -191,7 +191,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Token 810cc763b05878c0e23cdc6d89f5fc1fe26095f4",
+						"value": "Token fcc0b2e57470a1600c919a9d45a135c753a8e51b",
 						"type": "text"
 					}
 				],
@@ -226,7 +226,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Token 810cc763b05878c0e23cdc6d89f5fc1fe26095f4",
+						"value": "Token fcc0b2e57470a1600c919a9d45a135c753a8e51b",
 						"type": "text"
 					}
 				],
@@ -261,7 +261,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Token 810cc763b05878c0e23cdc6d89f5fc1fe26095f4",
+						"value": "Token fcc0b2e57470a1600c919a9d45a135c753a8e51b",
 						"type": "text"
 					}
 				],
@@ -307,7 +307,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Token 810cc763b05878c0e23cdc6d89f5fc1fe26095f4",
+						"value": "Token fcc0b2e57470a1600c919a9d45a135c753a8e51b",
 						"type": "text"
 					}
 				],
@@ -338,7 +338,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Token 810cc763b05878c0e23cdc6d89f5fc1fe26095f4",
+						"value": "Token fcc0b2e57470a1600c919a9d45a135c753a8e51b",
 						"type": "text"
 					}
 				],
@@ -378,7 +378,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Token 810cc763b05878c0e23cdc6d89f5fc1fe26095f4",
+						"value": "Token fcc0b2e57470a1600c919a9d45a135c753a8e51b",
 						"type": "text"
 					}
 				],
@@ -416,7 +416,7 @@
 					"formdata": [
 						{
 							"key": "username",
-							"value": "Sara",
+							"value": "Emma",
 							"type": "text"
 						}
 					]
@@ -583,12 +583,12 @@
 					"formdata": [
 						{
 							"key": "username",
-							"value": "Sara",
+							"value": "Emma",
 							"type": "text"
 						},
 						{
 							"key": "password",
-							"value": "sara12345!",
+							"value": "emma12345!",
 							"type": "text"
 						}
 					]
@@ -620,7 +620,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Token 810cc763b05878c0e23cdc6d89f5fc1fe26095f4",
+						"value": "Token 96d9cb04fb020e274ac285493ed66059f2181239",
 						"type": "text"
 					}
 				],
@@ -661,7 +661,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Token 810cc763b05878c0e23cdc6d89f5fc1fe26095f4",
+						"value": "Token 96d9cb04fb020e274ac285493ed66059f2181239",
 						"type": "text"
 					}
 				],
@@ -708,7 +708,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Token 810cc763b05878c0e23cdc6d89f5fc1fe26095f4",
+						"value": "Token 96d9cb04fb020e274ac285493ed66059f2181239",
 						"type": "text"
 					}
 				],
@@ -740,7 +740,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Token 810cc763b05878c0e23cdc6d89f5fc1fe26095f4",
+						"value": "Token 96d9cb04fb020e274ac285493ed66059f2181239",
 						"type": "text"
 					}
 				],
@@ -821,7 +821,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Token 5e3869a42a1ac055eb1dfcc6bb852ca0785da2e2",
+						"value": "Token 898d097d76aaf1978a58b92802f551bd2479b894",
 						"type": "text"
 					}
 				],
@@ -851,7 +851,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Token 5e3869a42a1ac055eb1dfcc6bb852ca0785da2e2",
+						"value": "Token 898d097d76aaf1978a58b92802f551bd2479b894",
 						"type": "text"
 					}
 				],
@@ -886,13 +886,13 @@
 			"response": []
 		},
 		{
-			"name": "Admin can Delete Menu Item",
+			"name": "Manager can Delete Menu Item",
 			"request": {
 				"method": "DELETE",
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Token 810cc763b05878c0e23cdc6d89f5fc1fe26095f4",
+						"value": "Token 96d9cb04fb020e274ac285493ed66059f2181239",
 						"type": "text"
 					}
 				],
@@ -923,7 +923,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Token 810cc763b05878c0e23cdc6d89f5fc1fe26095f4",
+						"value": "Token 96d9cb04fb020e274ac285493ed66059f2181239",
 						"type": "text"
 					}
 				],
