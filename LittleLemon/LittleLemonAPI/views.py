@@ -14,6 +14,14 @@ from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.pagination import PageNumberPagination
 
 class MenuItemsListCreate(generics.ListCreateAPIView):
+    """
+    get:
+    Returns a paginated list of all menu items.
+    Supports search by 'title' and category title, and ordering by 'title' or 'price'.
+
+    post:
+    Creates a new menu item. Only accessible to admin users.
+    """
     queryset = MenuItem.objects.all()
     serializer_class = MenuItemSerializer
     filter_backends = [filters.SearchFilter, filters.OrderingFilter]
@@ -30,6 +38,16 @@ class MenuItemsListCreate(generics.ListCreateAPIView):
         return [permissions.AllowAny()]
 
 class MenuItemsRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
+    """
+    get:
+    Retrieves a menu item by its ID.
+
+    put/patch:
+    Updates a menu item. Only accessible to users in the Manager group.
+
+    delete:
+    Deletes a menu item. Only accessible to users in the Manager group.
+    """
     queryset = MenuItem.objects.all()
     serializer_class = MenuItemSerializer
     def get_permissions(self):
@@ -38,16 +56,34 @@ class MenuItemsRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
         return [permissions.AllowAny()]
 
 class CategoryList(generics.ListAPIView):
+    """
+    get:
+    Returns a list of all categories. Requires authentication.
+    """
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
     permission_classes = [IsAuthenticated]
 
 class CategoryCreate(generics.CreateAPIView):
+    """
+    post:
+    Creates a new category. Only accessible to admin users.
+    """
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
     permission_classes = [IsAdminUser]
 
 class CartListCreate(generics.ListCreateAPIView):
+    """
+    get:
+    Returns all items in the authenticated user's cart.
+
+    post:
+    Adds an item to the authenticated user's cart.
+
+    delete:
+    Clears all items in the authenticated user's cart.
+    """
     serializer_class = CartSerializer
     permission_classes = [IsAuthenticated]
 
@@ -60,6 +96,18 @@ class CartListCreate(generics.ListCreateAPIView):
         return Response("ok")
 
 class OrderView(generics.ListCreateAPIView):
+    """
+    get:
+    Returns orders based on the user's role:
+    - Superuser: all orders
+    - Normal user: only their orders
+    - Delivery crew: only assigned orders
+    - Manager: all orders
+
+    post:
+    Creates a new order using items in the authenticated user's cart.
+    Automatically calculates the total and creates OrderItems.
+    """
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
     permission_classes = [IsAuthenticated]
@@ -107,8 +155,9 @@ class OrderView(generics.ListCreateAPIView):
         
         return Response(order_serializer.errors, status=400)
 
-
+    
     def get_total_price(self, user):
+        """Calculates the total price of all items in a user's cart."""
         total = 0
         items = Cart.objects.filter(user=user)
         for item in items:
@@ -116,6 +165,13 @@ class OrderView(generics.ListCreateAPIView):
         return total
     
 class SingleOrderView(generics.RetrieveUpdateAPIView):
+    """
+    get:
+    Retrieves a single order by ID. Requires authentication.
+
+    put/patch:
+    Updates an order only if the user belongs to a group; normal users cannot update.
+    """
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
     permission_classes = [IsAuthenticated]
@@ -130,6 +186,16 @@ class SingleOrderView(generics.RetrieveUpdateAPIView):
 @api_view(['POST', 'GET', 'DELETE'])
 @permission_classes([IsAdminUser])
 def managers(request):
+    """
+    get:
+    Lists all users in the Manager group.
+
+    post:
+    Adds a user to the Manager group. Requires 'username' in request body.
+
+    delete:
+    Removes a user from the Manager group. Requires 'username' in request body.
+    """
     manager = Group.objects.get(name="Manager")
     if request.method == 'GET':
             users = manager.user_set.all().values('id','username','email')
@@ -152,6 +218,16 @@ def managers(request):
 @api_view(['POST', 'GET', 'DELETE'])
 @permission_classes([IsAuthenticated])
 def delivery_crew(request):
+    """
+    get:
+    Lists all users in the Delivery crew group.
+
+    post:
+    Adds a user to the Delivery crew group. Only accessible to Managers or Superadmins. Requires 'username'.
+
+    delete:
+    Removes a user from the Delivery crew group. Only accessible to Managers or Superadmins. Requires 'username'.
+    """
     delivery_crew = Group.objects.get(name="Delivery crew")
     if request.method == 'GET':
         users = delivery_crew.user_set.all().values('id', 'username', 'email')
