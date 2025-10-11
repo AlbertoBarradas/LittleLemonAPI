@@ -1,6 +1,7 @@
 superuser:
 -username: admin
 -password: admin
+-token: f91f9bf7024ca6c3ebba7b0d3e6e0bc52e8cb670
 
 regular user:
 -username: Frank
