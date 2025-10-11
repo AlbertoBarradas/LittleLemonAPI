@@ -119,3 +119,6 @@ python manage.py runserver
 Para probar la API, puedes usar Postman con una colección que se incluye en la carpeta **docs**, de esta manera se simplifica el testeo de los endpoints.
 
 Importa la colección en Postman y ejecuta las peticiones en orden.
+
+## Author
+Alberto Barradas
